@@ -21,7 +21,7 @@ public class AddUser {
         System.out.println(uri_id);
         String email = _user.getEmail();
         int admin = _user.getAdmin();
- 
+  
         String sql = "INSERT INTO users (uriid,firstname, lastname, username, password, email, admin) VALUES (?, ?, ?, ?, ?, ?, ?)";
     
            try (Connection conn = Connect.connect();

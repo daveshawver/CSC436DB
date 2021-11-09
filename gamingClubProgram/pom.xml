@@ -131,11 +131,18 @@
   </build>
       <profiles>
             <profile>
-                <id>WSL</id>
+                <id>C</id>
                     <build>
                       <directory>/mnt/c/newJavaProject</directory>
                       <finalName>prog</finalName>
                     </build>
             </profile>
-    </profiles>
+              <profile>
+                  <id>WSL</id>
+                      <build>
+                        <directory>home/davids/CSC436/DatabaseProj/CSC436DB</directory>
+                        <finalName>prog</finalName>
+                      </build>
+              </profile>
+      </profiles>
 </project>

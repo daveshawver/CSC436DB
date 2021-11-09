@@ -22,13 +22,15 @@ public class BindButtonclicktoExitingRegistration implements ActionListener, Key
     }
 
     public void actionPerformed(ActionEvent e){ 
-        LoginScreen.loginScreen(mainFrame);          
+        DatabasePath newDBPathInstance = DatabasePath.getInstance();
+        LoginScreen.loginScreen(mainFrame, newDBPathInstance.getPath());          
     }
     
     @Override
     public void keyPressed(KeyEvent e) {
     if (e.getKeyCode()==KeyEvent.VK_ENTER){
-        LoginScreen.loginScreen(mainFrame);
+        DatabasePath newDBPathInstance = DatabasePath.getInstance();
+        LoginScreen.loginScreen(mainFrame, newDBPathInstance.getPath());      
         }
     }
 

@@ -16,9 +16,12 @@ public class LoginScreen {
 
     public static void main(String[] args){
         FrameandCardHolder mainFrame = new FrameandCardHolder("URI GC Item Rental Database");
-        loginScreen(mainFrame);
+        loginScreen(mainFrame, args[0]);
     }
-    public static void loginScreen(FrameandCardHolder mainFrame) {
+    public static void loginScreen(FrameandCardHolder mainFrame, String dbPath) {
+
+        DatabasePath newPathInstance = DatabasePath.getInstance();
+        newPathInstance.setPath(dbPath);
         
         mainFrame.loginScreenCard.removeAll();
         mainFrame.loginScreenCard.setLayout(new BoxLayout(mainFrame.loginScreenCard, BoxLayout.LINE_AXIS));

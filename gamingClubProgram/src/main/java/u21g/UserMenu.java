@@ -161,7 +161,8 @@ public static void userMenu(User user, FrameandCardHolder mainFrame) {
     printHistory.addActionListener(new ActionListener() { //Perform action
 
         public void actionPerformed (ActionEvent e) {
-            LoginScreen.loginScreen(mainFrame);
+            DatabasePath newDBPathInstance = DatabasePath.getInstance();
+            LoginScreen.loginScreen(mainFrame, newDBPathInstance.getPath());      
         }
 
     });
@@ -171,7 +172,8 @@ public static void userMenu(User user, FrameandCardHolder mainFrame) {
     returnLogin.addActionListener(new ActionListener() { //Perform action
 
         public void actionPerformed (ActionEvent e) {
-            LoginScreen.loginScreen(mainFrame);
+            DatabasePath newDBPathInstance = DatabasePath.getInstance();
+            LoginScreen.loginScreen(mainFrame, newDBPathInstance.getPath());      
         }
 
     });

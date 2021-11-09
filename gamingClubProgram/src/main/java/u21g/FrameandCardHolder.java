@@ -19,7 +19,7 @@ public class FrameandCardHolder extends JFrame {
     final public String ADMINMENUCARD = "Admin Menu";
     final public String REGISTRATIONCARD = "Registration Card";
     final public String RETURNITEMCARD = "Return Item";
-
+    public String database_path;
     public JPanel loginScreenCard, userMenuCard, searchBrowsetoRentCard, 
     rentAnItemCard, cardHolderPanel, registrationCard, returnItemCard;
     public JTable searchBrowseTable;
@@ -29,8 +29,6 @@ public class FrameandCardHolder extends JFrame {
 
         setTitle(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
         loginScreenCard = new JPanel();
 
 
