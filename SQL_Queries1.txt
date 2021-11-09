@@ -1,0 +1,152 @@
+List of special queries:
+
+Tables: game_title, game_copy, user, tickets, admin
+
+game_title (title_num, game_name, total_copies, available copies)
+
+create table game_title(
+	title_num integer not null primary key autoincrement,
+	game_name varchar(50) unique not null,
+	total_copies integer not null,
+	available_copies integer not null);
+
+create table game_copy(
+	copy_id integer not null primary key autoincrement,
+	title_num integer not null, 
+	is_available integer not null,
+	foreign key(title_num) references game_title(title_num);
+	
+create table user(
+	uriid integer not null primary key,
+	username varchar(50) unique not null,
+	password varchar(50) not null,
+	email varchar(100),
+	firstname varchar(50) not null,
+	lastname varchar(50) not null);
+
+ create table tickets(
+	ticket_num integer not null primary key autoincrement,
+	uriid integer not null,
+	copy_id integer not null,
+	checkout_date text not null,
+	currentlyOut boolean not null,
+	due_date text generated always as (date(julianday(checkout_date)+3)),
+	foreign key(uriid) references user(uriid),
+	foreign key(copy_id) references game_copy(copy_id));
+	
+create table admin(
+	role varchar(50) not null,
+	uriid integer not null,
+	foreign key(uriid) references user(uriid)
+	);
+
+
+# Rent a game
+
+(1) check and see if there is an available copy
+	
+	see if the following is greater than 0
+
+	select available_copies from game_title where game_name = "Blood";	
+
+(2) pick the first available copy
+
+	select copy_id from game_copy natural join game_title where game_name='Blood' limit 1;
+	
+(3) generate a ticket for this user and copy that was picked
+
+	insert into tickets (uriid, copy_id, checkout_date, currentlyOut) 
+		values (1, 8, date('now','localtime'), 1);
+
+(4) update is_available attribute for this copy on game_copy table
+
+	update game_copy set is_available = 0 where copy_id = 8;
+
+(5) decrement available_copies by 1 on the game_title table
+
+	update game_title set available_copies = available_copies - 1 where game_name='Blood';
+
+(6) return ticket number
+
+	 select ticket_num from tickets where uriid=1 and copy_id=8;
+	
+
+# Return a game based on uriid and copy_id
+
+(1) update ticket table that game has been returned for this ticket
+
+update tickets set currentlyOut = 0 where ticket_num = 1;
+
+(2) update game_copy table, update that copy is available
+
+nested select statement
+
+update game_copy set is_checked_out=0 where copy_id= 
+	(select copy_id from tickets where ticket_num=1);
+
+(3) update game_title table, restore item to inventory
+
+
+update game_title set available_copies = available_copies + 1
+	where title_num=(select title_num from game_copy natural 
+	join tickets where ticket_num=1);
+
+
+# Return information for all games currently checked out for a user (java program will figure out due date)
+	
+(1) select firstname, lastname, game_name, checkout_date from user natural join tickets natural join game_copy natural join game_title where uriid=1 and currentlyOut=1;
+
+
+# Return list of users who have at least one item that is past due
+# they cannot rent any further items until return past due one.
+
+
+select firstname, lastname, username, uriid 
+	from user natural join tickets 
+	where julianday('now','localtime') > julianday(due_date);
+
+
+# Return most popular game_title in past month and how many times it was rented
+
+--> SQLite does not have the ability to use any or all... so this query becomes much more complicated.
+
+select game_name, count(*) as gameCount from 
+((game_title inner join game_copy on game_title.title_num = game_copy.title_num) 
+inner join (select copy_id as cpid from tickets where julianday(tickets.checkout_date) > (julianday('now','localtime')-30)) on game_copy.copy_id = cpid)
+group by game_title.game_name having gameCount >= (select count(*) as result from ((game_title inner join game_copy on game_title.title_num = game_copy.title_num) 
+inner join (select copy_id as cpid from tickets where julianday(tickets.checkout_date) > (julianday('now','localtime')-30)) on game_copy.copy_id = cpid) 
+group by game_title.game_name order by result desc limit 1);
+
+
+# Add an item to the inventory
+
+--> simple insert statement for both game_title and new records
+for each game_copy instance for that game title... probably don't need to show in class
+
+# Remove a user from the users table
+
+(1) delete from user where uriid=3;
+
+# Add an administrator (roles include worker and manager)
+
+(1) insert into admin (role, uriid) values ('worker', 3);
+
+# Return list of administrators 
+
+(1) select firstname, lastname, username, uriid, role from user natural join admin;
+	
+# while setting up fake data in the database -- 
+# total number of copies from copies table for each title should match total_copies from title table
+update game_title 
+	set total_copies = titlecopies.copycount 
+	from (select title_num, count(*) as copycount from game_copy group by title_num) 
+		as titlecopies 
+	where game_title.title_num=titlecopies.title_num;
+
+
+# records in available_copies column should match sum from available_copies in game_copy table
+update game_title 
+	set total_copies = titlecopies.copycount 
+	from (select title_num, sum(is_available) as copycount from game_copy group by title_num) 
+		as titlecopies 
+	where game_title.title_num=titlecopies.title_num;
