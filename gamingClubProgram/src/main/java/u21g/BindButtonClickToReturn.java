@@ -175,16 +175,9 @@ public class BindButtonClickToReturn implements ActionListener, KeyListener{
                                 System.out.println(se.getMessage());
                             }
 
-                            // Update game status if it was 0
-                            String gamestatuspwsql = "UPDATE games SET game_status = '1' WHERE title_num = ?";
-                            try(PreparedStatement gamestatuspstmt = conn.prepareStatement(gamestatuspwsql)){
-                                gamestatuspstmt.setInt(1, titlenumINT);
-                                gamestatuspstmt.executeUpdate();
-                            }catch(SQLException se){
-                                System.out.println(se.getMessage());
-                            }
+           
                                 // Insrease Available Copies
-                            String copiespwsql = "UPDATE games SET available_copies = available_copies + 1 WHERE title_num = ?";
+                            String copiespwsql = "UPDATE game_title SET available_copies = available_copies + 1 WHERE title_num = ?";
                             try(PreparedStatement copiesUPDATEpstmt = conn.prepareStatement(copiespwsql)){
                                 copiesUPDATEpstmt.setInt(1, titlenumINT);
                                 copiesUPDATEpstmt.executeUpdate();

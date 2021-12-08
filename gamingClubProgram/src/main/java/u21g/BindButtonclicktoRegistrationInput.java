@@ -116,7 +116,7 @@ public class BindButtonclicktoRegistrationInput implements ActionListener, KeyLi
 
     if (uriidGood && lnameGood && pwGood && fnameGood && emailGood && unameGood){
 
-        User newUser = new User(uriid, firstName, lastName, userName, password, email, User.CUSTOMER);
+        User newUser = new User(uriid, firstName, lastName, userName, password, email);
         AddUser.insert(newUser);
         ToastMessage message = new ToastMessage("User successfully registered!!", mainFrame);
         message.display();

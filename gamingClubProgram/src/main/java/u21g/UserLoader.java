@@ -13,19 +13,21 @@ public class UserLoader{
 
     public static User loadUser(String uriid){
 		User user = new User();
-		String sqlString = "SELECT * FROM users WHERE uriid = " + uriid;
+		String sqlString = "SELECT * FROM user WHERE uriid = " + uriid;
 		List<User> fromDB = loadUsersFromDB(sqlString);
 		user = fromDB.get(0);
 		return user;
 	}
 
 	public static List<User> loadAllUsers(){
-		List<User> users = new ArrayList();
-		String sqlString = "SELECT * FROM users";
+		List<User> users;
+		String sqlString = "SELECT * FROM user";
 		List<User> fromDB = loadUsersFromDB(sqlString);
 		users = fromDB; // fromDB exists so we can check it for errors if need be, but I haven't done that yet here
 		return users;
 	}
+
+
 
 	private static List<User> loadUsersFromDB(String sqlString){
 		List<User> users = new ArrayList();
@@ -38,8 +40,8 @@ public class UserLoader{
                                              RS.getString("lastname"),
                                              RS.getString("username"),
                                              RS.getString("password"),
-                                             RS.getString("email"),
-						                     RS.getInt("admin"));
+                                             RS.getString("email")
+						                     );
 						users.add(user);
                     }
                 } catch (SQLException e) {

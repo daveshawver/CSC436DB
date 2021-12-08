@@ -73,8 +73,8 @@ public class BindButtonclicktoLoginInput implements ActionListener, KeyListener 
 
                         User user = UserLoader.loadUser(rs.getString("uriid"));
 
-                        if(user.getAdmin()==1) {
-                            AdminMenu.adminMenu();
+                        if(user.getAdmin()=="worker" || user.getAdmin()=="manager") {
+                            UserMenu.userMenu(user, mainFrame);
                         }
 
                         else {

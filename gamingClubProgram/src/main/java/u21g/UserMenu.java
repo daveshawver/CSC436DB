@@ -33,7 +33,7 @@ public static void userMenu(User user, FrameandCardHolder mainFrame) {
         public void actionPerformed(ActionEvent e){
 
             Connection connection = Connect.connect();
-            String sql="SELECT game_name FROM games"; //Retreive data from database
+            String sql="SELECT game_name FROM game_title"; //Retreive data from database
             try {
                 Statement stmt = connection.createStatement(); //connect to databasese librabry
                 stmt=connection.createStatement();
@@ -50,19 +50,20 @@ public static void userMenu(User user, FrameandCardHolder mainFrame) {
             }    
 
              connection = Connect.connect();
-            sql="SELECT game_status FROM games"; //Retreive data from database
+            sql="SELECT available_copies FROM game_title"; //Retreive data from database
             try {
 
                 Statement stmt = connection.createStatement(); //connect to database librabry
                 ResultSet rs=stmt.executeQuery(sql);
                 Vector<Object> isAvailableColumn = new Vector<Object> ();
+
                 Object obj = new Object();
                 String available = "Available";
                 String checkedOut = "Currently checked out";
 
                 while (rs.next()) {
                     obj = rs.getObject(1);
-                    if (obj.toString().equals("1")) {
+                    if (!(obj.toString().equals("0"))) {
                         isAvailableColumn.add(available);
                     }
                     else {

@@ -13,7 +13,7 @@ public class LoadGames {
 
     public static List<ItemTitle> loadGames() {
 
-        String retrieveGames = "SELECT * FROM games";
+        String retrieveGames = "SELECT * FROM game_title";
          List<ItemTitle> itemTitles = new ArrayList<ItemTitle>();
         try (Connection conn=Connect.connect();
             PreparedStatement pstmt = conn.prepareStatement(retrieveGames);
@@ -22,7 +22,7 @@ public class LoadGames {
                 while (gamesRS.next()) { 
                
                     ItemTitle gameTitle = new ItemTitle(gamesRS.getInt("title_num"), gamesRS.getString("game_name"), 
-                    gamesRS.getInt("total_copies"), gamesRS.getInt("game_status"), gamesRS.getInt("available_copies"));
+                    gamesRS.getInt("total_copies"), gamesRS.getInt("available_copies"));
             
                     itemTitles.add(gameTitle);
                 }

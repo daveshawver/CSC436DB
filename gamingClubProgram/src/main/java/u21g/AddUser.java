@@ -22,7 +22,7 @@ public class AddUser {
         String email = _user.getEmail();
         String role= "worker";
   
-        String sql = "INSERT INTO users (uriid,firstname, lastname, username, password, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user (uriid,firstname, lastname, username, password, email) VALUES (?, ?, ?, ?, ?, ?)";
     
            try (Connection conn = Connect.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
