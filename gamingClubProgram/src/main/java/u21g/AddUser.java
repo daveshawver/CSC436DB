@@ -20,9 +20,9 @@ public class AddUser {
         int uri_id = _user.getUriID();
         System.out.println(uri_id);
         String email = _user.getEmail();
-        int admin = _user.getAdmin();
+        String role= "worker";
   
-        String sql = "INSERT INTO users (uriid,firstname, lastname, username, password, email, admin) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (uriid,firstname, lastname, username, password, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
     
            try (Connection conn = Connect.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -32,10 +32,21 @@ public class AddUser {
                 pstmt.setString(4, user_name);
                 pstmt.setString(5, pass_word);
                 pstmt.setString(6, email);         
-                pstmt.setInt(7, admin);
                 pstmt.executeUpdate();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
-        }            
+          
+        String sql2 = "INSERT INTO admin (uriid, role) VALUES (?, ?)";
+    
+           try (Connection conn = Connect.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql2)){
+                pstmt.setInt(1, uri_id);
+                pstmt.setString(2, role);
+
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } 
 }

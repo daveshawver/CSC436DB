@@ -154,7 +154,7 @@ public class BindButtonClickToReturn implements ActionListener, KeyListener{
                                 System.out.println(se.getMessage());
                             }
                                 // Execute database update statement
-                            String updatepwsql = "UPDATE GAME_COPY SET copy_status = '1' WHERE copy_id = ?";
+                            String updatepwsql = "UPDATE GAME_COPY SET is_available = '1' WHERE copy_id = ?";
                             try(PreparedStatement copyIDUpdatepstmt = conn.prepareStatement(updatepwsql)){
                                 copyIDUpdatepstmt.setInt(1, uniqueCopyIDint);
                                 copyIDUpdatepstmt.executeUpdate();
