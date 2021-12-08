@@ -144,5 +144,12 @@
                         <finalName>prog</finalName>
                       </build>
               </profile>
+              <profile>
+                <id>DB</id>
+                    <build>
+                      <directory>/mnt/c/newJavaProject/DB_FILE</directory>
+                      <finalName>prog</finalName>
+                    </build>
+            </profile>
       </profiles>
 </project>

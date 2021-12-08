@@ -150,3 +150,11 @@ update game_title
 	from (select title_num, sum(is_available) as copycount from game_copy group by title_num) 
 		as titlecopies 
 	where game_title.title_num=titlecopies.title_num;
+
+# User Update View:
+
+create view UserView as (
+	
+
+
+);
