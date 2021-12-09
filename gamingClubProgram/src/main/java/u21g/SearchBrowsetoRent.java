@@ -25,7 +25,7 @@ public class SearchBrowsetoRent {
          mainFrame.searchBrowsetoRentCard.removeAll();
          mainFrame.searchBrowsetoRentCard.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-         JLabel instructionMsg = new JLabel("To rent a game, doubleclick on it...", JLabel.CENTER);
+         JLabel instructionMsg = new JLabel("To rent a game, double click on it...", JLabel.CENTER);
          instructionMsg.setFont(new Font("Veranda", Font.BOLD, 24));
          instructionMsg.setPreferredSize(new Dimension(500,40));
 

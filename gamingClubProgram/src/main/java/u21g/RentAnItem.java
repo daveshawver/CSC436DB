@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import javax.swing.JFrame;
-import java.util.List;
-import java.util.ArrayList;
+
 
 public class RentAnItem {
     static boolean avail;
@@ -41,7 +39,6 @@ public class RentAnItem {
         if (avail == true) {
         
    
-
        String getFirstAvailableCopy = "SELECT copy_id from game_copy natural join game_title where game_name=? and is_available > 0 limit 1;";
          
        String updateFirstAvailableGameCopy = "UPDATE GAME_COPY SET is_available = '0' WHERE copy_id = (SELECT copy_id FROM (SELECT GAME_COPY.copy_id,"+
@@ -49,8 +46,6 @@ public class RentAnItem {
           "GAME_COPY.title_num=game_title.title_num AND game_title.game_name= ? AND GAME_COPY.is_available>=1) WHERE RANK=1)"; 
 
         String updateAvailableCopies = "UPDATE game_title SET available_copies =  CASE WHEN available_copies >'0' THEN available_copies-1 ELSE '0' END WHERE game_name = ?";
-
-
 
         try (Connection conn1=Connect.connect()){
             try (PreparedStatement pstmt1 = conn1.prepareStatement(getFirstAvailableCopy))
@@ -130,7 +125,7 @@ public class RentAnItem {
                     System.out.println(e.getMessage());
                 }
         
-            JOptionPane.showMessageDialog(mainFrame, "Item rented to user "+user.getFirstName()+user.getLastName()+"\n your ticket number is"+newTicket.getTicketID());//+"Item due on"+dateDue);
+            JOptionPane.showMessageDialog(mainFrame, "Item rented to user "+user.getFirstName()+user.getLastName()+"\n your ticket number is "+newTicket.getTicketID());//+"Item due on"+dateDue);
 
 
 
@@ -139,7 +134,5 @@ public class RentAnItem {
     }
 
     }
-        //code to indicate an update is needed.
-        //register a contorller class to listen to when data in model has changed
-        //controller class will tell UI to update ... depends on when table
+
 }

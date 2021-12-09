@@ -20,6 +20,7 @@ public class AddUser {
         int uri_id = _user.getUriID();
         System.out.println(uri_id);
         String email = _user.getEmail();
+        //hardcoded every new user as worker for now.
         String role= "worker";
   
         String sql = "INSERT INTO user (uriid,firstname, lastname, username, password, email) VALUES (?, ?, ?, ?, ?, ?)";

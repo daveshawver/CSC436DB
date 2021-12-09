@@ -8,15 +8,6 @@ import java.sql.*;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 
-/**
- * Does various function regarding private members numerator and denominator
- * @param F_ticketID JTextField object - Holds user entered ticket ID
- * @param mainFrame FrameandCardHolder object - Makes sure the instance of the return feature window is it's standalone window
- * @param uniqueCopyIDint Integer - Used to convert derived copy ID that's retreived as a string and converted into an int for later use
- * @param titlenumINT Integer - Used to convert derived title ID that's retreived as a string and converted into an int for later user
- * @param outcome Integer - Keeps track of what the result of the user's input into the tickt ID text field was. Primarily used for testing 
- * @param test Boolean - Identifies if the instance the BindButtonClickToReturn object is created in is for testing purposes
- */
 
 public class BindButtonClickToReturn implements ActionListener, KeyListener{
 
@@ -145,7 +136,7 @@ public class BindButtonClickToReturn implements ActionListener, KeyListener{
                             String newCommand = "UPDATE tickets SET currentlyOut = '0' WHERE ticket_num = ?";
                             try(PreparedStatement ticketpstmt2 = conn.prepareStatement(newCommand)){
                                 ticketpstmt2.setInt(1, ticketID);
-                                ResultSet rs3 = ticketpstmt2.executeQuery();
+                                ticketpstmt2.executeUpdate();
                                     
                             }catch(SQLException se){
                                 System.out.println(se.getMessage());
