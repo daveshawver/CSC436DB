@@ -33,8 +33,8 @@ public class BindButtonClickToReturn implements ActionListener, KeyListener{
      *
      */
 
-    BindButtonClickToReturn(JTextField F_tickerID, FrameandCardHolder mainFrame, User user, Boolean test){
-        this.F_ticketID = F_tickerID;
+    BindButtonClickToReturn(JTextField F_ticketID, FrameandCardHolder mainFrame, User user, Boolean test){
+        this.F_ticketID = F_ticketID;
         this.mainFrame = mainFrame;
         this.test = test;
         this.user = user;
@@ -140,6 +140,17 @@ public class BindButtonClickToReturn implements ActionListener, KeyListener{
                         
                             // Update copy status to 1
 
+                            //change status of ticket
+                            // Get copy_ID of user input ticket
+                            String newCommand = "UPDATE tickets SET currentlyOut = '0' WHERE ticket_num = ?";
+                            try(PreparedStatement ticketpstmt2 = conn.prepareStatement(newCommand)){
+                                ticketpstmt2.setInt(1, ticketID);
+                                ResultSet rs3 = ticketpstmt2.executeQuery();
+                                    
+                            }catch(SQLException se){
+                                System.out.println(se.getMessage());
+                            }
+
                                 // Get copy_ID of user input ticket
                             String ticketIDpwsql = "SELECT copy_id FROM tickets WHERE ticket_num= ?";
                             try(PreparedStatement ticketpstmt = conn.prepareStatement(ticketIDpwsql)){
@@ -185,8 +196,8 @@ public class BindButtonClickToReturn implements ActionListener, KeyListener{
                                 System.out.println(se.getMessage());
                             }
                         }
+                        }
                     }
-                }
                 catch(SQLException se){
                     System.out.println(se.getMessage());
                 }

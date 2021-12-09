@@ -19,7 +19,8 @@ public class BindDoubleClicktoRent extends MouseAdapter {
         int row = table.rowAtPoint(point);
         if (mouseEvent.getClickCount() == 2 && table.getSelectedRow() != -1) {
         final Object obj = (Object)table.getValueAt(row,0);
-         RentAnItem.rentAnItem(obj.toString(), user, mainFrame);
+        RentAnItem newRAI = new RentAnItem();
+         newRAI.rentAnItem(obj.toString(), user, mainFrame);
        }
     }
 }
