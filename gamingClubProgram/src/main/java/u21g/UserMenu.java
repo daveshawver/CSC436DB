@@ -16,83 +16,34 @@ import java.awt.FlowLayout;
 
 public class UserMenu {
 
+    
+    static User user;
+    static FrameandCardHolder mainFrame;
+
+
 public static void userMenu(User user, FrameandCardHolder mainFrame) {
+
+    UserMenu.user = user;
+    UserMenu.mainFrame = mainFrame;
 
     mainFrame.userMenuCard.removeAll();
      mainFrame.userMenuCard.setLayout(new FlowLayout());
 
-    
 
     List <ItemTitle> itemTitles = LoadGames.loadGames();   
-    Vector<Vector<Object>> tableData = new Vector<Vector<Object>>();
 
 
     JButton rentItem=new JButton("Rent an Item");//creating instance of JButton  
     rentItem.setPreferredSize(new Dimension(160,25));//x axis, y axis, width, height 
     rentItem.addActionListener(new ActionListener() { 
         public void actionPerformed(ActionEvent e){
-
-            Connection connection = Connect.connect();
-            String sql="SELECT game_name FROM game_title"; //Retreive data from database
-            try {
-                Statement stmt = connection.createStatement(); //connect to databasese librabry
-                stmt=connection.createStatement();
-                ResultSet rs=stmt.executeQuery(sql);
-
-                while(rs.next()) {
-                    Vector<Object> gameEntry = new Vector<Object>();
-                    gameEntry.add(rs.getObject(1));
-                    tableData.add(gameEntry);
-                }
-            }catch (SQLException e1) {
-                // TODO Auto-generated catch block
-                 JOptionPane.showMessageDialog(null, e1);
-            }    
-
-             connection = Connect.connect();
-            sql="SELECT available_copies FROM game_title"; //Retreive data from database
-            try {
-
-                Statement stmt = connection.createStatement(); //connect to database librabry
-                ResultSet rs=stmt.executeQuery(sql);
-                Vector<Object> isAvailableColumn = new Vector<Object> ();
-
-                Object obj = new Object();
-                String available = "Available";
-                String checkedOut = "Currently checked out";
-
-                while (rs.next()) {
-                    obj = rs.getObject(1);
-                    if (!(obj.toString().equals("0"))) {
-                        isAvailableColumn.add(available);
-                    }
-                    else {
-                        isAvailableColumn.add(checkedOut);
-                    }
-                }
-
-                for (int i=0; i < isAvailableColumn.size(); i++) {
-                    tableData.get(i).add(isAvailableColumn.get(i));
-                }
-                
-
-
-                Vector <String> columnNames = new Vector<String>();
-                columnNames.add("Game Title");
-                columnNames.add("Availability");
-
-                DefaultTableModel gameTable = new DefaultTableModel(tableData, columnNames);
-
-                SearchBrowsetoRent JTableSearch = new SearchBrowsetoRent(gameTable, user, mainFrame);
-
-                       
-            }catch (SQLException e1) {
-                     JOptionPane.showMessageDialog(null, e1);
-            }   
-            }            
-             
+         
+            new SearchBrowsetoRent(user, mainFrame);   
+            }             
         }
     );
+
+
 
     JButton returnItem=new JButton("Return an Item");//creating instance of JButton  
     returnItem.setPreferredSize(new Dimension(160,25));//x axis, y axis, width, height 

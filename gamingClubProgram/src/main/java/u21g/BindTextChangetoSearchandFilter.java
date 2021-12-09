@@ -12,10 +12,11 @@ public class BindTextChangetoSearchandFilter implements DocumentListener {
 
     JTextField jtf;
     TableRowSorter<DefaultTableModel> sorter;
-    
+
     BindTextChangetoSearchandFilter (JTextField jtf, TableRowSorter<DefaultTableModel> sorter) {
         this.jtf = jtf;
         this.sorter = sorter;
+
     }
     @Override
     public void insertUpdate(DocumentEvent e) {

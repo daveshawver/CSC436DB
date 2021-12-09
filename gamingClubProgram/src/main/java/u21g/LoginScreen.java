@@ -62,7 +62,7 @@ public class LoginScreen {
 
         register_but.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                UserRegistration R = new UserRegistration(mainFrame);
+                new UserRegistration(mainFrame);
             }
         });
 

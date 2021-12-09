@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableRowSorter;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.table.DefaultTableModel;
 
 public class FrameandCardHolder extends JFrame {
 
@@ -24,6 +25,7 @@ public class FrameandCardHolder extends JFrame {
     rentAnItemCard, cardHolderPanel, registrationCard, returnItemCard;
     public JTable searchBrowseTable;
     public TableRowSorter sorter;
+    public DefaultTableModel model;
 
     FrameandCardHolder(String title){
 
