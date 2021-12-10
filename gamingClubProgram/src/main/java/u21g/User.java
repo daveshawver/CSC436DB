@@ -32,6 +32,17 @@ public class User {
             this.lastName = lastName;
             this.admin = "worker";
         }
+
+            
+        public User (int uriID, String username, String firstName, String lastName){
+            this.uriID = uriID;
+            this.userName = username;
+            this.password = "";
+            this.email = "";
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.admin = "worker";
+        }
     
         public int getUriID () {
             return uriID;
