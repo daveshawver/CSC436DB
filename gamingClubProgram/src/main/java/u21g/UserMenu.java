@@ -113,8 +113,12 @@ public static void userMenu(User user, FrameandCardHolder mainFrame) {
     printHistory.addActionListener(new ActionListener() { //Perform action
 
         public void actionPerformed (ActionEvent e) {
-            DatabasePath newDBPathInstance = DatabasePath.getInstance();
-            LoginScreen.loginScreen(mainFrame, newDBPathInstance.getPath());      
+
+            System.out.println("inside user menu");
+
+            new DisplayCustomerHistory (user, mainFrame);
+            // DatabasePath newDBPathInstance = DatabasePath.getInstance();
+            // LoginScreen.loginScreen(mainFrame, newDBPathInstance.getPath());      
         }
 
     });

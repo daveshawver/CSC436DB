@@ -16,7 +16,6 @@ public class BindButtonclicktoExitingRegistration implements ActionListener, Key
     
     FrameandCardHolder mainFrame;
     
-    
     BindButtonclicktoExitingRegistration(FrameandCardHolder mainFrame){
         this.mainFrame = mainFrame;
     }

@@ -16,6 +16,7 @@ public class LoadTableData {
 
     static void loadModelData(User user, FrameandCardHolder mainFrame){
 
+
         Vector<Vector<Object>> tableData = new Vector<Vector<Object>>();
         
         Connection connection = Connect.connect();

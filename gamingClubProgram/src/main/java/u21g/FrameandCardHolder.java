@@ -16,16 +16,17 @@ public class FrameandCardHolder extends JFrame {
     final public String LOGINSCREENCARD = "Login";
     final public String USERMENUCARD = "User Menu";
     final public String SEARCHBROWSETORENT = "Search/Browse to Rent";
+    final public String DISPLAYHISTORY = "Display History";
     final public String RENTANITEMCARD = "Rent an Item";
     final public String ADMINMENUCARD = "Admin Menu";
     final public String REGISTRATIONCARD = "Registration Card";
     final public String RETURNITEMCARD = "Return Item";
     public String database_path;
     public JPanel loginScreenCard, userMenuCard, searchBrowsetoRentCard, 
-    rentAnItemCard, cardHolderPanel, registrationCard, returnItemCard;
-    public JTable searchBrowseTable;
-    public TableRowSorter sorter;
-    public DefaultTableModel model;
+    rentAnItemCard, cardHolderPanel, registrationCard, returnItemCard, displayHistoryCard;
+    public JTable searchBrowseTable, custHistoryTable;
+    public TableRowSorter sorter, custHistSorter;
+    public DefaultTableModel model, custHistModel;
 
     FrameandCardHolder(String title){
 
@@ -40,6 +41,7 @@ public class FrameandCardHolder extends JFrame {
         registrationCard = new JPanel();
         cardHolderPanel = new JPanel(new MyCardLayout());        
         returnItemCard = new JPanel();
+        displayHistoryCard = new JPanel();
 
         cardHolderPanel.add(loginScreenCard, LOGINSCREENCARD);
         cardHolderPanel.add(userMenuCard, USERMENUCARD);
