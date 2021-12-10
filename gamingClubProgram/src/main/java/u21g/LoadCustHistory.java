@@ -57,6 +57,6 @@ public class LoadCustHistory {
             columnNames.add("Checkout Date");
             columnNames.add("Due Date");
 
-            mainFrame.custHistModel = new DefaultTableModel(tableData, columnNames);
+            mainFrame.custHistoryModel = new DefaultTableModel(tableData, columnNames);
     }
 }

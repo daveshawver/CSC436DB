@@ -25,7 +25,7 @@ public class FrameandCardHolder extends JFrame {
     rentAnItemCard, cardHolderPanel, registrationCard, returnItemCard;
     public JTable searchBrowseTable;
     public TableRowSorter sorter;
-    public DefaultTableModel model;
+    public DefaultTableModel model, custHistoryModel;
 
     FrameandCardHolder(String title){
 
