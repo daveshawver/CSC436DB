@@ -12,7 +12,6 @@ public class Connect {
         //String url = "jdbc:sqlite:sampledatabase.db";
 
         DatabasePath newInstance = DatabasePath.getInstance();
-        System.out.println(newInstance.getPath());
 
 		String url = "jdbc:sqlite:"+newInstance.getPath();
         Connection conn = null;

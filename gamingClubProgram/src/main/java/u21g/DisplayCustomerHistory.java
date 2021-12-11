@@ -38,6 +38,8 @@ public class DisplayCustomerHistory {
       public DisplayCustomerHistory(User user, FrameandCardHolder mainFrame) {
 
 
+
+
          this.mainFrame = mainFrame;
 
          mainFrame.displayHistoryCard.removeAll();
@@ -89,6 +91,7 @@ public class DisplayCustomerHistory {
          else {
             
             mainFrame.custHistoryTable.setModel(mainFrame.custHistModel);
+            mainFrame.custHistModel.fireTableDataChanged();
          }
          
          if (jsp == null) {

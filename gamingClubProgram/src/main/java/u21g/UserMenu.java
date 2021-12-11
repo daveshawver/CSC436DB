@@ -114,7 +114,6 @@ public static void userMenu(User user, FrameandCardHolder mainFrame) {
 
         public void actionPerformed (ActionEvent e) {
 
-            System.out.println("inside user menu");
 
             new DisplayCustomerHistory (user, mainFrame);
             // DatabasePath newDBPathInstance = DatabasePath.getInstance();

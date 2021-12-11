@@ -41,9 +41,8 @@ public class RentAnItem {
    
        String getFirstAvailableCopy = "SELECT copy_id from game_copy natural join game_title where game_name=? and is_available > 0 limit 1;";
          
-       String updateFirstAvailableGameCopy = "UPDATE GAME_COPY SET is_available = '0' WHERE copy_id = (SELECT copy_id FROM (SELECT GAME_COPY.copy_id,"+
-         " row_number() OVER (ORDER BY GAME_COPY.copy_id) AS RANK FROM GAME_COPY INNER JOIN game_title ON "+
-          "GAME_COPY.title_num=game_title.title_num AND game_title.game_name= ? AND GAME_COPY.is_available>=1) WHERE RANK=1)"; 
+       String updateFirstAvailableGameCopy = "UPDATE GAME_COPY SET is_available = '0' WHERE copy_id = (select copy_id from game_copy natural "+
+       "join game_title where game_name=? and is_available > 0 limit 1)"; 
 
         String updateAvailableCopies = "UPDATE game_title SET available_copies =  CASE WHEN available_copies >'0' THEN available_copies-1 ELSE '0' END WHERE game_name = ?";
 
@@ -95,8 +94,6 @@ public class RentAnItem {
                 try (PreparedStatement pstmt3 = conn1.prepareStatement(addTicket))
                     {
                         pstmt3.setInt(1, user.getUriID());
-                        System.out.println(user.getUriID());
-                        System.out.println(newTicket.getCopyID());
                         pstmt3.setInt(2, newTicket.getCopyID());
                         pstmt3.executeUpdate();
                     } catch (SQLException e) {
@@ -129,7 +126,6 @@ public class RentAnItem {
 
 
 
-        System.out.println("System updated successfully.");
         LoadTableData.loadModelData(user, mainFrame);
         new SearchBrowsetoRent(user, mainFrame);
     }

@@ -43,14 +43,7 @@ public class LoadTableData {
                 tableData.add(gameEntry);
             }
 
-    
-            Iterator it = tableData.iterator();
 
-            System.out.println("Vector elements are:");
-            while(it.hasNext()){
-              System.out.println(it.next());
-            }
-            
         }catch (SQLException e1) {
             // TODO Auto-generated catch block
              JOptionPane.showMessageDialog(null, e1);
