@@ -1,8 +1,0 @@
-(1) Fix the update to the database after a return.
-    done...
-
-(2) Make option to print outstanding tickets
-
-(3) Add in the views
-
-(4) 
