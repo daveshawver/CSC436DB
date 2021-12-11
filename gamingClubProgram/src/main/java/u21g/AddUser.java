@@ -17,7 +17,6 @@ public class AddUser {
         String last_name = _user.getLastName();
         String pass_word = _user.getPassword();
         int uri_id = _user.getUriID();
-        System.out.println(uri_id);
         String email = _user.getEmail();
         //hardcoded every new user as worker for now.
         String role= "worker";

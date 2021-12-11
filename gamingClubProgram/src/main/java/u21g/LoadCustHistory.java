@@ -28,7 +28,15 @@ public class LoadCustHistory {
                         custHistory.addElement(rs.getObject(3));
                         custHistory.addElement(rs.getInt(4));
                         custHistory.addElement(rs.getObject(5));
-                        custHistory.addElement(rs.getObject(6));
+                        int temp = rs.getInt(6);
+                        String isItCurrentlyOut = "";
+                        if (temp == 0){
+                            isItCurrentlyOut = "No";
+                        }
+                        else {
+                            isItCurrentlyOut = "Yes";
+                        }
+                        custHistory.addElement(isItCurrentlyOut);
                         custHistory.addElement(rs.getObject(7));
                         custHistory.addElement(rs.getObject(8));
                         tableData.addElement(custHistory);                

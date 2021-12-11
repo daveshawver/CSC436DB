@@ -77,7 +77,7 @@ public class DisplayCustomerHistory {
 
                JTableHeader header = mainFrame.custHistoryTable.getTableHeader();
                header.setFont(new Font("Veranda", Font.PLAIN, 20));
-               mainFrame.custHistoryTable.setPreferredScrollableViewportSize(new Dimension(1200,600));
+               mainFrame.custHistoryTable.setPreferredScrollableViewportSize(new Dimension(1600,600));
                mainFrame.custHistoryTable.setRowHeight(40);
                resizeColumnWidth(mainFrame.custHistoryTable);
                mainFrame.custHistoryTable.setFont(new Font("Veranda", Font.PLAIN, 20));
@@ -94,7 +94,7 @@ public class DisplayCustomerHistory {
          if (jsp == null) {
          jsp = new JScrollPane(mainFrame.custHistoryTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
          JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-         jsp.setPreferredSize(new Dimension(1200, 600));
+         jsp.setPreferredSize(new Dimension(1600, 600));
          mainFrame.custHistSorter.sort();
 
          gbc.gridy = 2;
@@ -119,7 +119,6 @@ public class DisplayCustomerHistory {
       mainFrame.displayHistoryCard.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
       mainFrame.displayHistoryCard.revalidate();
       mainFrame.displayHistoryCard.repaint();
-      System.out.println("hiiiii");
       mainFrame.showCard(mainFrame.DISPLAYHISTORY);
    }
 }   
