@@ -130,6 +130,7 @@ public class RentAnItem {
 
 
         System.out.println("System updated successfully.");
+        LoadTableData.loadModelData(user, mainFrame);
         new SearchBrowsetoRent(user, mainFrame);
     }
 

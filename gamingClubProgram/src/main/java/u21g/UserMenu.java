@@ -108,13 +108,17 @@ public static void userMenu(User user, FrameandCardHolder mainFrame) {
     }
     );
      
-    JButton printHistory=new JButton("Print rental history");
+    JButton printHistory=new JButton("View my rental history");
     printHistory.setPreferredSize(new Dimension(160,25));//x axis, y axis, width, height 
     printHistory.addActionListener(new ActionListener() { //Perform action
 
         public void actionPerformed (ActionEvent e) {
-            DatabasePath newDBPathInstance = DatabasePath.getInstance();
-            LoginScreen.loginScreen(mainFrame, newDBPathInstance.getPath());      
+
+            System.out.println("inside user menu");
+
+            new DisplayCustomerHistory (user, mainFrame);
+            // DatabasePath newDBPathInstance = DatabasePath.getInstance();
+            // LoginScreen.loginScreen(mainFrame, newDBPathInstance.getPath());      
         }
 
     });
