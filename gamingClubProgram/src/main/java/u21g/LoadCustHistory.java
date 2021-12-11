@@ -33,16 +33,7 @@ public class LoadCustHistory {
                         custHistory.addElement(rs.getObject(8));
                         tableData.addElement(custHistory);                
                     }
-                    int counter1 = 0;
-                    for (int i = 0; i < tableData.size(); i++){
-                    // Loop through all elements of current row
-                        for (int j = 0; j < tableData.get(i).size(); j++)
-                            System.out.print(tableData.get(i).get(j) + " ");
-                        }
-                        System.out.println("counter 1 = "+counter1);
-                        counter1++;
-                    }
-
+    
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -59,4 +50,8 @@ public class LoadCustHistory {
 
             mainFrame.custHistModel = new DefaultTableModel(tableData, columnNames);
     }
+    catch (SQLException e) {
+        System.out.println(e.getMessage());
+    }
+}
 }

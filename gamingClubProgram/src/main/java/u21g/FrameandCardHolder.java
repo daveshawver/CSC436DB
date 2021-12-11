@@ -49,6 +49,7 @@ public class FrameandCardHolder extends JFrame {
         cardHolderPanel.add(searchBrowsetoRentCard, SEARCHBROWSETORENT);
         cardHolderPanel.add(registrationCard, REGISTRATIONCARD);
         cardHolderPanel.add(returnItemCard, RETURNITEMCARD);
+        cardHolderPanel.add(displayHistoryCard, DISPLAYHISTORY);
     }
 
     void showCard(String cardIdentifier) {

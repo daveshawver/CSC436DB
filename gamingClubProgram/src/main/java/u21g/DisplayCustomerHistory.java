@@ -14,6 +14,22 @@ import javax.swing.RowFilter;
 
 public class DisplayCustomerHistory {
 
+   public void resizeColumnWidth(JTable table) {
+      final TableColumnModel columnModel = table.getColumnModel();
+      for (int column = 0; column < table.getColumnCount(); column++) {
+          int width = 15; // Min width
+          for (int row = 0; row < table.getRowCount(); row++) {
+              TableCellRenderer renderer = table.getCellRenderer(row, column);
+              Component comp = table.prepareRenderer(renderer, row, column);
+              width = Math.max(comp.getPreferredSize().width +1 , width);
+          }
+          if(width > 300)
+              width=300;
+          columnModel.getColumn(column).setPreferredWidth(width);
+      }
+  }
+
+
 
     public FrameandCardHolder mainFrame;
     private JScrollPane jsp;
@@ -42,8 +58,10 @@ public class DisplayCustomerHistory {
          pan.add(instructionMsg, gbc);
         gbc.gridy = 1;
         pan.add(Box.createRigidArea(new Dimension(0,20)), gbc);
+        
          
         LoadCustHistory.loadCustHistory(user, mainFrame);
+
 
          mainFrame.custHistSorter = new TableRowSorter<DefaultTableModel>(mainFrame.custHistModel);
          
@@ -51,17 +69,17 @@ public class DisplayCustomerHistory {
 
                public boolean editCellAt(int row, int column, java.util.EventObject e){
                   return false;
-                  }
-               };  
-
+               }
+            };  
                this.mainFrame.custHistoryTable.setRowSorter(mainFrame.custHistSorter);
   
                mainFrame.custHistSorter.setSortsOnUpdates(true);
 
                JTableHeader header = mainFrame.custHistoryTable.getTableHeader();
                header.setFont(new Font("Veranda", Font.PLAIN, 20));
-               mainFrame.custHistoryTable.setPreferredScrollableViewportSize(new Dimension(700,700));
+               mainFrame.custHistoryTable.setPreferredScrollableViewportSize(new Dimension(1200,600));
                mainFrame.custHistoryTable.setRowHeight(40);
+               resizeColumnWidth(mainFrame.custHistoryTable);
                mainFrame.custHistoryTable.setFont(new Font("Veranda", Font.PLAIN, 20));
                List<RowSorter.SortKey> sortKeys = new ArrayList<>();
                int columnIndexToSort = 4;
@@ -69,13 +87,14 @@ public class DisplayCustomerHistory {
                mainFrame.custHistSorter.setSortKeys(sortKeys);
                }
          else {
-            mainFrame.custHistSorter.setModel(mainFrame.custHistModel);
+            
+            mainFrame.custHistoryTable.setModel(mainFrame.custHistModel);
          }
          
          if (jsp == null) {
          jsp = new JScrollPane(mainFrame.custHistoryTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
          JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-         jsp.setPreferredSize(new Dimension(700, 700));
+         jsp.setPreferredSize(new Dimension(1200, 600));
          mainFrame.custHistSorter.sort();
 
          gbc.gridy = 2;
@@ -100,6 +119,7 @@ public class DisplayCustomerHistory {
       mainFrame.displayHistoryCard.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
       mainFrame.displayHistoryCard.revalidate();
       mainFrame.displayHistoryCard.repaint();
+      System.out.println("hiiiii");
       mainFrame.showCard(mainFrame.DISPLAYHISTORY);
    }
 }   
