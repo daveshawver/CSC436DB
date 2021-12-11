@@ -11,7 +11,7 @@ public class User {
         private String email;
         private String firstName;
         private String lastName;
-        private int admin;
+        private String admin;
 
         public User () {
             this.uriID = 0;
@@ -20,17 +20,28 @@ public class User {
             this.email = "0";
             this.firstName = "0";
             this.lastName = "0";
-            this.admin = -1;
+            this.admin = "worker";
         };
     
-        public User (int uriID, String firstName, String lastName, String username, String password, String email, int admin){
+        public User (int uriID, String firstName, String lastName, String username, String password, String email){
             this.uriID = uriID;
             this.userName = username;
             this.password = password;
             this.email = email;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.admin = admin;
+            this.admin = "worker";
+        }
+
+            
+        public User (int uriID, String username, String firstName, String lastName){
+            this.uriID = uriID;
+            this.userName = username;
+            this.password = "";
+            this.email = "";
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.admin = "worker";
         }
     
         public int getUriID () {
@@ -75,10 +86,10 @@ public class User {
         public void setLastName (String lastName) {
             this.lastName = lastName;
         }
-        public int getAdmin() {
+        public String getAdmin() {
             return admin;
         }
-        public void setAdmin (int admin) {
+        public void setAdmin (String admin) {
             this.admin = admin;
         }
     }

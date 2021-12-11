@@ -10,11 +10,11 @@ public class ItemTitle {
 
     ItemTitle() {}
 
-    ItemTitle(int itemTitleNum, String itemTitle, int totalCopies, int isAvailable, int availableCopies)
+    ItemTitle(int itemTitleNum, String itemTitle, int totalCopies, int availableCopies)
     {   this.itemTitle = itemTitle;
         this.itemTitleNum = itemTitleNum;
         this.totalCopies = totalCopies;
-        this.isAvailable = (isAvailable==0) ? false : true;
+        this.isAvailable = (availableCopies==0) ? false : true;
         this.availableCopies = availableCopies;
     }
 }

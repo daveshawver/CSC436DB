@@ -8,15 +8,6 @@ import java.sql.*;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 
-/**
- * Does various function regarding private members numerator and denominator
- * @param F_ticketID JTextField object - Holds user entered ticket ID
- * @param mainFrame FrameandCardHolder object - Makes sure the instance of the return feature window is it's standalone window
- * @param uniqueCopyIDint Integer - Used to convert derived copy ID that's retreived as a string and converted into an int for later use
- * @param titlenumINT Integer - Used to convert derived title ID that's retreived as a string and converted into an int for later user
- * @param outcome Integer - Keeps track of what the result of the user's input into the tickt ID text field was. Primarily used for testing 
- * @param test Boolean - Identifies if the instance the BindButtonClickToReturn object is created in is for testing purposes
- */
 
 public class BindButtonClickToReturn implements ActionListener, KeyListener{
 
@@ -33,8 +24,8 @@ public class BindButtonClickToReturn implements ActionListener, KeyListener{
      *
      */
 
-    BindButtonClickToReturn(JTextField F_tickerID, FrameandCardHolder mainFrame, User user, Boolean test){
-        this.F_ticketID = F_tickerID;
+    BindButtonClickToReturn(JTextField F_ticketID, FrameandCardHolder mainFrame, User user, Boolean test){
+        this.F_ticketID = F_ticketID;
         this.mainFrame = mainFrame;
         this.test = test;
         this.user = user;
@@ -140,6 +131,17 @@ public class BindButtonClickToReturn implements ActionListener, KeyListener{
                         
                             // Update copy status to 1
 
+                            //change status of ticket
+                            // Get copy_ID of user input ticket
+                            String newCommand = "UPDATE tickets SET currentlyOut = '0' WHERE ticket_num = ?";
+                            try(PreparedStatement ticketpstmt2 = conn.prepareStatement(newCommand)){
+                                ticketpstmt2.setInt(1, ticketID);
+                                ticketpstmt2.executeUpdate();
+                                    
+                            }catch(SQLException se){
+                                System.out.println(se.getMessage());
+                            }
+
                                 // Get copy_ID of user input ticket
                             String ticketIDpwsql = "SELECT copy_id FROM tickets WHERE ticket_num= ?";
                             try(PreparedStatement ticketpstmt = conn.prepareStatement(ticketIDpwsql)){
@@ -175,16 +177,9 @@ public class BindButtonClickToReturn implements ActionListener, KeyListener{
                                 System.out.println(se.getMessage());
                             }
 
-                            // Update game status if it was 0
-                            String gamestatuspwsql = "UPDATE games SET game_status = '1' WHERE title_num = ?";
-                            try(PreparedStatement gamestatuspstmt = conn.prepareStatement(gamestatuspwsql)){
-                                gamestatuspstmt.setInt(1, titlenumINT);
-                                gamestatuspstmt.executeUpdate();
-                            }catch(SQLException se){
-                                System.out.println(se.getMessage());
-                            }
+           
                                 // Insrease Available Copies
-                            String copiespwsql = "UPDATE games SET available_copies = available_copies + 1 WHERE title_num = ?";
+                            String copiespwsql = "UPDATE game_title SET available_copies = available_copies + 1 WHERE title_num = ?";
                             try(PreparedStatement copiesUPDATEpstmt = conn.prepareStatement(copiespwsql)){
                                 copiesUPDATEpstmt.setInt(1, titlenumINT);
                                 copiesUPDATEpstmt.executeUpdate();
@@ -192,8 +187,8 @@ public class BindButtonClickToReturn implements ActionListener, KeyListener{
                                 System.out.println(se.getMessage());
                             }
                         }
+                        }
                     }
-                }
                 catch(SQLException se){
                     System.out.println(se.getMessage());
                 }

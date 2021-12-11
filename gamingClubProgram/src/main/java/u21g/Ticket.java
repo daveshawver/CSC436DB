@@ -6,36 +6,53 @@ import java.time.LocalDateTime;
  */
 public class Ticket {
 
-    final int userID;
-    final int itemID;
-    final boolean item_is_game;
+    int userID;
+    int copy_id;
+    int ticketID;
 
     final int days_to_rent = 7;
     private LocalDateTime checkout_date;
     private LocalDateTime return_date;
 
-    private boolean active_ticket;
+    private boolean currentlyOut;
 
     /**
      *
      * @param userID the User ID of the user creating the ticket
-     * @param itemID the Item ID of the item being checked in or out
-     * @param item_is_game a boolean value to track if an item is a game or a piece of equipment
-     * @param active_ticket a boolean value to track if a ticket is a out ticket (active) or an in ticket (inactive)
+     * @param copy_id the Item ID of the item being checked in or out
+     * @param currentlyOut a boolean value to track if a ticket is a out ticket (active) or an in ticket (inactive)
      */
-    public Ticket(int userID, int itemID, boolean item_is_game, boolean active_ticket){
+    public Ticket(){};
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public void setCopyID(int copyID) {
+        this.copy_id = copyID;
+    }
+
+    public void setCurrentlyOut(boolean currentlyOut){
+        this.currentlyOut = currentlyOut;
+    }
+    
+    public void setTicketID(int ticketID){
+        this.ticketID = ticketID;
+    }
+
+
+    public Ticket(int userID, int copy_id, boolean currentlyOut, int ticketID){
         if( userID < 0 ){
             throw new IllegalArgumentException("User ID cannot be less than 0");
         }
         this.userID = userID;
-        if( itemID < 0 ){
+        if( copy_id < 0 ){
             throw new IllegalArgumentException("Item ID cannot be less than 0");
         }
-        this.itemID = itemID;
+        this.copy_id = copy_id;
 
-        this.item_is_game = item_is_game;
-        this.active_ticket = active_ticket;
-        if( active_ticket ) {
+        this.currentlyOut = currentlyOut;
+        if( currentlyOut ) {
             checkout_date = LocalDateTime.now();
             return_date = checkout_date.plusDays(days_to_rent);
         }
@@ -45,11 +62,15 @@ public class Ticket {
     }
 
     /**
-     * Simple getter function for the item ID
+     * Simple getter function for the ticket ID
      * @return an int of the item ID
      */
-    public int getItemID() {
-        return itemID;
+    public int getTicketID() {
+        return ticketID;
+    }
+
+    public int getCopyID() {
+        return copy_id;
     }
 
     /**
@@ -61,19 +82,11 @@ public class Ticket {
     }
 
     /**
-     * Gets whether the item is a game or not
-     * @return true if item is a game, false otherwise
-     */
-    public boolean isItem_is_game() {
-        return item_is_game;
-    }
-
-    /**
      * Gets whether a ticket is active or not
      * @return true if the ticket is active, false otherwise
      */
     public boolean isActive_ticket() {
-        return active_ticket;
+        return currentlyOut;
     }
 
     /**

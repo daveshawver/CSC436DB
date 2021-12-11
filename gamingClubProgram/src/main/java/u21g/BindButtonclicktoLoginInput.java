@@ -55,7 +55,7 @@ public class BindButtonclicktoLoginInput implements ActionListener, KeyListener 
 
         else { //If both the fields are present then to login the user, check wether the user exists already
         
-            String unamepwsql = "SELECT * FROM userTableLogin WHERE username= ? AND password= ?";
+            String unamepwsql = "SELECT * FROM user WHERE username= ? AND password= ?";
 
         try (Connection conn=Connect.connect();
             PreparedStatement pstmt = conn.prepareStatement(unamepwsql)){
@@ -73,8 +73,8 @@ public class BindButtonclicktoLoginInput implements ActionListener, KeyListener 
 
                         User user = UserLoader.loadUser(rs.getString("uriid"));
 
-                        if(user.getAdmin()==1) {
-                            AdminMenu.adminMenu();
+                        if(user.getAdmin()=="worker" || user.getAdmin()=="manager") {
+                            UserMenu.userMenu(user, mainFrame);
                         }
 
                         else {

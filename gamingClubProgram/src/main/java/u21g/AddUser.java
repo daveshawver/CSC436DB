@@ -1,7 +1,6 @@
 package u21g;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
@@ -18,11 +17,11 @@ public class AddUser {
         String last_name = _user.getLastName();
         String pass_word = _user.getPassword();
         int uri_id = _user.getUriID();
-        System.out.println(uri_id);
         String email = _user.getEmail();
+        //hardcoded every new user as worker for now.
         String role= "worker";
   
-        String sql = "INSERT INTO users (uriid,firstname, lastname, username, password, email) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user (uriid,firstname, lastname, username, password, email) VALUES (?, ?, ?, ?, ?, ?)";
     
            try (Connection conn = Connect.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)){

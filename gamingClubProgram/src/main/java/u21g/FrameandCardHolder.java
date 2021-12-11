@@ -9,21 +9,24 @@ import javax.swing.JTable;
 import javax.swing.table.TableRowSorter;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.table.DefaultTableModel;
 
 public class FrameandCardHolder extends JFrame {
 
     final public String LOGINSCREENCARD = "Login";
     final public String USERMENUCARD = "User Menu";
     final public String SEARCHBROWSETORENT = "Search/Browse to Rent";
+    final public String DISPLAYHISTORY = "Display History";
     final public String RENTANITEMCARD = "Rent an Item";
     final public String ADMINMENUCARD = "Admin Menu";
     final public String REGISTRATIONCARD = "Registration Card";
     final public String RETURNITEMCARD = "Return Item";
     public String database_path;
     public JPanel loginScreenCard, userMenuCard, searchBrowsetoRentCard, 
-    rentAnItemCard, cardHolderPanel, registrationCard, returnItemCard;
-    public JTable searchBrowseTable;
-    public TableRowSorter sorter;
+    rentAnItemCard, cardHolderPanel, registrationCard, returnItemCard, displayHistoryCard;
+    public JTable searchBrowseTable, custHistoryTable;
+    public TableRowSorter sorter, custHistSorter;
+    public DefaultTableModel model, custHistModel;
 
     FrameandCardHolder(String title){
 
@@ -38,6 +41,7 @@ public class FrameandCardHolder extends JFrame {
         registrationCard = new JPanel();
         cardHolderPanel = new JPanel(new MyCardLayout());        
         returnItemCard = new JPanel();
+        displayHistoryCard = new JPanel();
 
         cardHolderPanel.add(loginScreenCard, LOGINSCREENCARD);
         cardHolderPanel.add(userMenuCard, USERMENUCARD);
@@ -45,6 +49,7 @@ public class FrameandCardHolder extends JFrame {
         cardHolderPanel.add(searchBrowsetoRentCard, SEARCHBROWSETORENT);
         cardHolderPanel.add(registrationCard, REGISTRATIONCARD);
         cardHolderPanel.add(returnItemCard, RETURNITEMCARD);
+        cardHolderPanel.add(displayHistoryCard, DISPLAYHISTORY);
     }
 
     void showCard(String cardIdentifier) {
